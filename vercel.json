@@ -1,5 +1,4 @@
 {
   "version": 2,
-  "buildCommand": "pnpm build",
-  "outputDirectory": "public"
+  "buildCommand": "pnpm build"
 }

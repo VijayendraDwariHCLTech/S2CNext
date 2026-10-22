@@ -6,7 +6,7 @@ This repository now supports Vercel without removing the existing Railway deploy
 
 1. Open the Vercel dashboard and choose **Add New > Project**.
 2. Import `VijayendraDwariHCLTech/S2CNext` from GitHub.
-3. Keep the framework detection or choose **Other**. The committed `vercel.json` supplies the build command and output directory.
+3. Keep the framework detection or choose **Other**. The committed `vercel.json` supplies the build command, while Vercel's standard root `public/` directory serves the generated frontend.
 4. Add the environment variables before deploying:
 
    - `NODE_ENV=production`
