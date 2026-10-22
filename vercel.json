@@ -1,4 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "pnpm build"
+  "buildCommand": "pnpm build",
+  "rewrites": [
+    { "source": "/health", "destination": "/api" },
+    { "source": "/api/:path*", "destination": "/api" }
+  ]
 }

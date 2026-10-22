@@ -1,6 +1,6 @@
 # Vercel deployment playbook — S2CNext
 
-This repository now supports Vercel without removing the existing Railway deployment path. Railway continues to use `Dockerfile`, `railway.json`, `server/_core/index.ts`, and `dist/public`. Vercel uses the root `index.ts` Express export, `vercel.json`, and emits the Vite frontend to the root `public/` directory during a Vercel build.
+This repository now supports Vercel without removing the existing Railway deployment path. Railway continues to use `Dockerfile`, `railway.json`, `server/_core/index.ts`, and `dist/public`. Vercel uses `api/index.ts` as the explicit Express Function, `vercel.json` rewrites for `/health` and `/api/*`, and emits the Vite frontend to the root `public/` directory during a Vercel build.
 
 ## Deploy from GitHub
 
@@ -14,7 +14,7 @@ This repository now supports Vercel without removing the existing Railway deploy
    - `DATABASE_URL`: a MySQL/TiDB-compatible connection URL
    - `FOUNDRY_APP_KEY` and `FOUNDRY_APP_SECRET` only when authorized and required
 
-5. Deploy the project. Vercel should run `pnpm build`, create the Express Function from `index.ts`, and serve the Vite output from `public/`.
+5. Deploy the project. Vercel should run `pnpm build`, create the Express Function from `api/index.ts`, and serve the Vite output from `public/`.
 6. Verify `/health` on the Vercel deployment. Expected JSON:
 
 ```json
