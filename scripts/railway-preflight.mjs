@@ -2,13 +2,15 @@ import { readFileSync, existsSync } from 'node:fs';
 const read = p => readFileSync(p, 'utf8');
 const pkg = JSON.parse(read('package.json'));
 const config = JSON.parse(read('railway.json'));
+const appSource = read('server/app.ts');
+const dockerEntrypoint = read('server/_core/index.ts');
 const checks = [
   ['Dockerfile present', existsSync('Dockerfile')],
   ['Railway config uses Dockerfile', config.build?.builder === 'DOCKERFILE'],
   ['Server entrypoint exists', existsSync('server/_core/index.ts')],
   ['Build script targets server entrypoint', pkg.scripts?.build?.includes('server/_core/index.ts')],
-  ['Health route exists', read('server/_core/index.ts').includes('app.get("/health"')],
-  ['Server binds injected port', read('server/_core/index.ts').includes('process.env.PORT')],
+  ['Health route exists', appSource.includes('app.get("/health"')],
+  ['Server binds injected port', dockerEntrypoint.includes('process.env.PORT')],
   ['Public frontend output configured', read('vite.config.ts').includes('"dist/public"')],
   ['Frozen lockfile present', existsSync('pnpm-lock.yaml')],
   ['Demo authentication issuance absent', !read('server/_core/context.ts').includes('jwtSign(')],

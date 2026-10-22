@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm build",
+  "outputDirectory": "public",
+  "functions": {
+    "index.ts": {
+      "maxDuration": 60
+    }
+  }
+}
