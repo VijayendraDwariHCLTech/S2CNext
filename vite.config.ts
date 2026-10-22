@@ -15,7 +15,7 @@ const PROJECT_ROOT = import.meta.dirname;
 const LOG_DIR = path.join(PROJECT_ROOT, ".manus-logs");
 const MAX_LOG_SIZE_BYTES = 1 * 1024 * 1024; // 1MB per log file
 const TRIM_TARGET_BYTES = Math.floor(MAX_LOG_SIZE_BYTES * 0.6); // Trim to 60% to avoid constant re-trimming
-const BUILD_OUTPUT_DIR = process.env.VERCEL ? "public" : "dist/public";
+const BUILD_OUTPUT_DIR = process.env.VERCEL || process.env.NETLIFY ? "public" : "dist/public";
 
 type LogSource = "browserConsole" | "networkRequests" | "sessionReplay";
 

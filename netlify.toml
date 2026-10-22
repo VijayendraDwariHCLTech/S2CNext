@@ -1,0 +1,29 @@
+[build]
+  command = "NETLIFY=1 pnpm build && pnpm exec esbuild scripts/netlify-function-entry.ts --bundle --platform=node --packages=external --format=esm --outfile=netlify/functions/api.js"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "10.4.1"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  external_node_modules = ["express", "serverless-http"]
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/health"
+  to = "/.netlify/functions/api/health"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
